@@ -1,0 +1,29 @@
+@page
+@model ReadNotesModel
+@{
+    ViewData["Title"] = "Ver Notas";
+}
+
+<h1>Ver Notas</h1>
+
+@if (Model.Arquivos.Count == 0)
+{
+    <p>Nenhuma nota encontrada.</p>
+}
+else
+{
+    <ul>
+        @foreach (var arquivo in Model.Arquivos)
+        {
+            <li>
+                <a asp-page="/NoteManager/ReadNotes" asp-route-arquivo="@arquivo">@arquivo</a>
+            </li>
+        }
+    </ul>
+}
+
+@if (!string.IsNullOrEmpty(Model.ArquivoSelecionado))
+{
+    <h2 class="mt-4">@Model.ArquivoSelecionado</h2>
+    <p>@Model.Conteudo</p>
+}
